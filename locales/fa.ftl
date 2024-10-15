@@ -7,6 +7,7 @@ setcommands-command-description = تنظیم دستورات ربات
 ## Welcome Feature
 
 welcome = خوش آمدید!
+ghazal = سلام غزل
 
 ## Language Feature
 

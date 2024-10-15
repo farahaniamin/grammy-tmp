@@ -8,13 +8,12 @@ import { chunk } from '#root/bot/helpers/keyboard.js'
 export async function createChangeLanguageKeyboard(ctx: Context) {
   const currentLocaleCode = await ctx.i18n.getLocale()
 
-  const getLabel = (code: string) => {
+  const getLabel = (code: string): string => {
     const isActive = code === currentLocaleCode
 
     return `${isActive ? '✅ ' : ''}${ISO6391.getNativeName(code)}`
   }
-
-  return InlineKeyboard.from(
+  const languageKeybord = InlineKeyboard.from(
     chunk(
       i18n.locales.map(localeCode => ({
         text: getLabel(localeCode),
@@ -25,4 +24,8 @@ export async function createChangeLanguageKeyboard(ctx: Context) {
       2,
     ),
   )
+
+  languageKeybord.text('➡️ Next', 'main')
+
+  return languageKeybord
 }

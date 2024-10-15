@@ -7,6 +7,12 @@ setcommands-command-description = Set bot commands
 ## Welcome Feature
 
 welcome = Welcome!
+help = Help!
+Deposit = Deposit
+Balance = Balance
+Back = Back
+ghazal = HI Ghazal
+
 
 ## Language Feature
 

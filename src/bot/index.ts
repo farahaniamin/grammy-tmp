@@ -16,6 +16,8 @@ import { createContextConstructor } from '#root/bot/context.js'
 import { i18n, isMultipleLocales } from '#root/bot/i18n.js'
 import type { Logger } from '#root/logger.js'
 import type { Config } from '#root/config.js'
+import { depositFeature } from '#root/bot/features/deposit.js'
+import { MenuFeature } from '#root/bot/features/main.js'
 
 interface Dependencies {
   config: Config
@@ -60,6 +62,8 @@ export function createBot(token: string, dependencies: Dependencies, options: Op
   protectedBot.use(i18n)
 
   // Handlers
+  protectedBot.use(MenuFeature)
+  protectedBot.use(depositFeature)
   protectedBot.use(welcomeFeature)
   protectedBot.use(adminFeature)
   if (isMultipleLocales)

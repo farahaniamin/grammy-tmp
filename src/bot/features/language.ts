@@ -15,6 +15,14 @@ feature.command('language', logHandle('command-language'), async (ctx) => {
   })
 })
 
+feature.callbackQuery('language', logHandle('command-language'), async (ctx) => {
+  await ctx.answerCallbackQuery('Back To Language')
+
+  return ctx.editFmtMessageText(ctx.t('language-select'), {
+    reply_markup: await createChangeLanguageKeyboard(ctx),
+  })
+})
+
 feature.callbackQuery(
   changeLanguageData.filter(),
   logHandle('keyboard-language-select'),
@@ -27,6 +35,7 @@ feature.callbackQuery(
       await ctx.i18n.setLocale(languageCode)
 
       return ctx.editMessageText(ctx.t('language-changed'), {
+
         reply_markup: await createChangeLanguageKeyboard(ctx),
       })
     }
