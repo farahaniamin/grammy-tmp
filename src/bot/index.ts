@@ -4,6 +4,7 @@ import { hydrateReply, parseMode } from '@grammyjs/parse-mode'
 import type { BotConfig, StorageAdapter } from 'grammy'
 import { Bot as TelegramBot } from 'grammy'
 import { sequentialize } from '@grammyjs/runner'
+import { conversations } from '@grammyjs/conversations'
 import { welcomeFeature } from '#root/bot/features/welcome.js'
 import { adminFeature } from '#root/bot/features/admin.js'
 import { languageFeature } from '#root/bot/features/language.js'
@@ -18,6 +19,7 @@ import type { Logger } from '#root/logger.js'
 import type { Config } from '#root/config.js'
 import { depositFeature } from '#root/bot/features/deposit.js'
 import { MenuFeature } from '#root/bot/features/main.js'
+import { greetingConversation } from '#root/bot/conversations/greeting.js'
 
 interface Dependencies {
   config: Config
@@ -60,6 +62,8 @@ export function createBot(token: string, dependencies: Dependencies, options: Op
   protectedBot.use(hydrate())
   protectedBot.use(session({ getSessionKey, storage: options.botSessionStorage }))
   protectedBot.use(i18n)
+  protectedBot.use(conversations())
+  protectedBot.use(greetingConversation())
 
   // Handlers
   protectedBot.use(MenuFeature)
